@@ -54,5 +54,13 @@ namespace NugetDependencyAnalysisTests
 
             actual.Should().BeEmpty();
         }
+
+        [Fact]
+        public void Handles_Non_Existent_Directory()
+        {
+            var actual = Target.Find(@"C:\Not_A_Real_Directory");
+
+            actual.Should().BeEmpty();
+        }
     }
 }

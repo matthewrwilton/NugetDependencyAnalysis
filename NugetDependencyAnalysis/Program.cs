@@ -25,10 +25,15 @@ namespace NugetDependencyAnalysis
         private ILogger Logger { get; }
 
         public IReadOnlyList<PackagesConfig> Find(string directory)
-        {            
+        {
             var packagesConfigs = new List<PackagesConfig>();
 
             var root = new DirectoryInfo(directory);
+            if (!root.Exists)
+            {
+                Logger.Error("{Directory} does not exist", directory);
+                return packagesConfigs;
+            }
 
             var packagesConfigFiles = root.GetFiles(PackagesConfigFileName, SearchOption.AllDirectories)
                 .ToList();
