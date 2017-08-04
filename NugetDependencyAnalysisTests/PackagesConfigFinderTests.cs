@@ -28,8 +28,8 @@ namespace NugetDependencyAnalysisTests
 
             var actual = Target.Find(testDirectory);
 
-            var expected = new List<PackagesConfig> {
-                new PackagesConfig(Path.Combine(TestDirectoriesLocation, @"SampleSolution\SampleProject\packages.config"), "SampleProject")
+            var expected = new List<PackagesConfigFile> {
+                new PackagesConfigFile(Path.Combine(TestDirectoriesLocation, @"SampleSolution\SampleProject\packages.config"), "SampleProject")
             };
 
             actual.Should().BeEquivalentTo(expected);

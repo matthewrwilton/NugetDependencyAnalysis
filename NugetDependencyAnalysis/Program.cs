@@ -25,7 +25,7 @@ namespace NugetDependencyAnalysis
                 .CreateLogger();
 
             var packagesConfigFinder = new PackagesConfigFinder(logger);
-            var packagesConfigs = packagesConfigFinder.Find(root);
+            var packagesConfigFiles = packagesConfigFinder.Find(root);
 
 
         }

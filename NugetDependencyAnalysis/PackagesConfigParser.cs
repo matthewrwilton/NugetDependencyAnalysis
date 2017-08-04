@@ -20,7 +20,7 @@ namespace NugetDependencyAnalysis
 
         private ILogger Logger { get; }
 
-        public IReadOnlyList<NugetPackage> Parse(PackagesConfig packagesConfigFile)
+        public IReadOnlyList<NugetPackage> Parse(PackagesConfigFile packagesConfigFile)
         {
             var contents = FileReader.ReadFileContents(packagesConfigFile.Path);
             if (contents == string.Empty)

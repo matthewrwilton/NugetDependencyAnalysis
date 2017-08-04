@@ -35,7 +35,7 @@ namespace NugetDependencyAnalysisTests
         [MemberData(nameof(Data))]
         public void Tests(TestData testData)
         {
-            var packagesConfigFile = new PackagesConfig("path", "project");
+            var packagesConfigFile = new PackagesConfigFile("path", "project");
 
             var mockLogger = new Mock<ILogger>();
             var mockFileReader = new Mock<IFileReader>();

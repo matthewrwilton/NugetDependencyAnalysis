@@ -55,7 +55,7 @@
     <Compile Include="FileReading\FileReader.cs" />
     <Compile Include="FileReading\IFileReader.cs" />
     <Compile Include="NugetPackage.cs" />
-    <Compile Include="PackagesConfig.cs" />
+    <Compile Include="PackagesConfigFile.cs" />
     <Compile Include="PackagesConfigFinder.cs" />
     <Compile Include="PackagesConfigParser.cs" />
     <Compile Include="Program.cs" />

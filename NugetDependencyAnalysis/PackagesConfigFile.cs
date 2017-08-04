@@ -2,9 +2,9 @@
 
 namespace NugetDependencyAnalysis
 {
-    internal class PackagesConfig
+    internal class PackagesConfigFile
     {
-        public PackagesConfig(string path, string projectName)
+        public PackagesConfigFile(string path, string projectName)
         {
             Path = path;
             ProjectName = projectName;
@@ -25,10 +25,10 @@ namespace NugetDependencyAnalysis
                 return true;
             }
 
-            return Equals((PackagesConfig)obj);
+            return Equals((PackagesConfigFile)obj);
         }
 
-        protected bool Equals(PackagesConfig other)
+        protected bool Equals(PackagesConfigFile other)
         {
             return Path == other.Path &&
                 ProjectName == other.ProjectName;
@@ -36,7 +36,7 @@ namespace NugetDependencyAnalysis
 
         public override int GetHashCode()
         {
-            throw new InvalidOperationException($"{nameof(PackagesConfig)} is not intended to be the key in a collection.");
+            throw new InvalidOperationException($"{nameof(PackagesConfigFile)} is not intended to be the key in a collection.");
         }
     }
 }
