@@ -11,20 +11,22 @@ namespace NugetDependencyAnalysisTests.Parsing
 {
     public class PackagesConfigParserTests
     {
+        private const string ProjectName = "project";
+
         public class TestData
         {
-            public TestData(string name, string packagesConfigContent, IReadOnlyList<NugetPackage> expectedPackages)
+            public TestData(string name, string packagesConfigContent, ProjectNugetsGrouping expectedProjectNugetsGrouping)
             {
                 Name = name;
                 PackagesConfigContent = packagesConfigContent;
-                ExpectedPackages = expectedPackages;
+                ExpectedProjectNugetsGrouping = expectedProjectNugetsGrouping;
             }
 
             public string Name { get; }
 
             public string PackagesConfigContent { get; }
 
-            public IReadOnlyList<NugetPackage> ExpectedPackages { get; }
+            public ProjectNugetsGrouping ExpectedProjectNugetsGrouping { get; }
 
             public override string ToString()
             {
@@ -36,7 +38,7 @@ namespace NugetDependencyAnalysisTests.Parsing
         [MemberData(nameof(Data))]
         public void Tests(TestData testData)
         {
-            var packagesConfigFile = new PackagesConfigFile("path", "project");
+            var packagesConfigFile = new PackagesConfigFile("path", ProjectName);
 
             var mockLogger = new Mock<ILogger>();
             var mockFileReader = new Mock<IFileReader>();
@@ -48,7 +50,8 @@ namespace NugetDependencyAnalysisTests.Parsing
 
             var actual = target.Parse(packagesConfigFile);
 
-            actual.Should().ContainInOrder(testData.ExpectedPackages);
+            actual.ProjectName.Should().Be(testData.ExpectedProjectNugetsGrouping.ProjectName);
+            actual.Nugets.Should().ContainInOrder(testData.ExpectedProjectNugetsGrouping.Nugets);
         }
 
         public static IEnumerable<object[]> Data = new List<object[]>
@@ -57,11 +60,11 @@ namespace NugetDependencyAnalysisTests.Parsing
             {
                 new TestData(
                     "Empty Content", 
-                    string.Empty, 
-                    new List<NugetPackage>())
+                    string.Empty,
+                    new ProjectNugetsGrouping(ProjectName, new List<NugetPackage>()))
             },
             
-            new object[] 
+            new object[]
             {
                 new TestData(
                     "Dependencies",
@@ -70,11 +73,15 @@ namespace NugetDependencyAnalysisTests.Parsing
                         <package id=""Castle.Core"" version=""4.1.1"" targetFramework=""net462"" />
                         <package id=""FluentAssertions"" version=""4.19.3"" targetFramework=""net462"" />
                       </packages>",
-                    new List<NugetPackage>
-                    {
-                        new NugetPackage("Castle.Core", "4.1.1", "net462"),
-                        new NugetPackage("FluentAssertions", "4.19.3", "net462")
-                    })
+                    new ProjectNugetsGrouping(
+                        ProjectName, 
+                        new List<NugetPackage>
+                        {
+                            new NugetPackage("Castle.Core", "4.1.1", "net462"),
+                            new NugetPackage("FluentAssertions", "4.19.3", "net462")
+                        }
+                    )
+                )
             },
 
             new object[]
@@ -82,7 +89,7 @@ namespace NugetDependencyAnalysisTests.Parsing
                 new TestData(
                     "Invalid XML",
                     @"abcdefg",
-                    new List<NugetPackage>())
+                    new ProjectNugetsGrouping(ProjectName, new List<NugetPackage>()))
             },
 
             new object[]
@@ -93,7 +100,7 @@ namespace NugetDependencyAnalysisTests.Parsing
                       <packages>
                         <package />
                       </packages>",
-                    new List<NugetPackage>())
+                    new ProjectNugetsGrouping(ProjectName, new List<NugetPackage>()))
             }
         };
     }

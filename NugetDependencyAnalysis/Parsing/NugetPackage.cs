@@ -42,5 +42,10 @@ namespace NugetDependencyAnalysis.Parsing
         {
             throw new InvalidOperationException($"{nameof(NugetPackage)} is not intended to be the key in a collection.");
         }
+
+        public override string ToString()
+        {
+            return $"{Name}, {Version}, {TargetFramework}";
+        }
     }
 }

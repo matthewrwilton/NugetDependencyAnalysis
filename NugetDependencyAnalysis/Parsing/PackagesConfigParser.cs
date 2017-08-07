@@ -21,13 +21,13 @@ namespace NugetDependencyAnalysis.Parsing
 
         private ILogger Logger { get; }
 
-        public IReadOnlyList<NugetPackage> Parse(PackagesConfigFile packagesConfigFile)
+        public ProjectNugetsGrouping Parse(PackagesConfigFile packagesConfigFile)
         {
             var contents = FileReader.ReadFileContents(packagesConfigFile.Path);
             if (contents == string.Empty)
             {
                 Logger.Warning("Config file located at {Path} is empty", packagesConfigFile.Path);
-                return new List<NugetPackage>();
+                return EmptyProjectNugetsGrouping(packagesConfigFile.ProjectName);
             }
 
             XDocument xDocument;
@@ -38,7 +38,7 @@ namespace NugetDependencyAnalysis.Parsing
             catch (XmlException e)
             {
                 Logger.Warning("Config file located at {Path} contains invalid XML - {XmlExceptionMessage}", packagesConfigFile.Path, e.Message);
-                return new List<NugetPackage>();
+                return EmptyProjectNugetsGrouping(packagesConfigFile.ProjectName);
             }
 
             try
@@ -49,13 +49,18 @@ namespace NugetDependencyAnalysis.Parsing
                                    package.Attribute("version").Value,
                                    package.Attribute("targetFramework").Value);
 
-                return packages.ToList();
+                return new ProjectNugetsGrouping(packagesConfigFile.ProjectName, packages.ToList());
             }
             catch (NullReferenceException)
             {
                 Logger.Warning("Config file located at {Path} contains package elements with missing id, version, or targetFramework attributes", packagesConfigFile.Path);
-                return new List<NugetPackage>();
+                return EmptyProjectNugetsGrouping(packagesConfigFile.ProjectName);
             }
+        }
+
+        private ProjectNugetsGrouping EmptyProjectNugetsGrouping(string projectName)
+        {
+            return new ProjectNugetsGrouping(projectName, new List<NugetPackage>());
         }
     }
 }

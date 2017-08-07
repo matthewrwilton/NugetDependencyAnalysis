@@ -48,16 +48,21 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparing\ProjectsNugetsComparer.cs" />
     <Compile Include="Parsing\FileReading\FileReader.cs" />
     <Compile Include="Parsing\FileReading\IFileReader.cs" />
     <Compile Include="Parsing\NugetPackage.cs" />
     <Compile Include="Finding\PackagesConfigFile.cs" />
     <Compile Include="Finding\PackagesConfigFinder.cs" />
     <Compile Include="Parsing\PackagesConfigParser.cs" />
+    <Compile Include="Parsing\ProjectNugetsGrouping.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
