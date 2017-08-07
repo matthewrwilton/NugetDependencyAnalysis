@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace NugetDependencyAnalysis.FileReading
+namespace NugetDependencyAnalysis.Parsing.FileReading
 {
     class FileReader : IFileReader
     {

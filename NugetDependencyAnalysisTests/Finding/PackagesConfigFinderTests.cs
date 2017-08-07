@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using FluentAssertions;
 using Moq;
-using NugetDependencyAnalysis;
+using NugetDependencyAnalysis.Finding;
 using Serilog;
 using Xunit;
 
-namespace NugetDependencyAnalysisTests
+namespace NugetDependencyAnalysisTests.Finding
 {
     public class PackagesConfigFinderTests
     {
@@ -17,7 +17,7 @@ namespace NugetDependencyAnalysisTests
             Target = new PackagesConfigFinder(mockLogger.Object);
         }
 
-        private string TestDirectoriesLocation => Path.Combine(Environment.CurrentDirectory, "_TestData");
+        private string TestDirectoriesLocation => Path.Combine(Environment.CurrentDirectory, @"Finding\_TestData");
 
         private PackagesConfigFinder Target { get; }
 

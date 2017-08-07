@@ -1,4 +1,5 @@
 ﻿using System;
+using NugetDependencyAnalysis.Finding;
 using Serilog;
 
 namespace NugetDependencyAnalysis

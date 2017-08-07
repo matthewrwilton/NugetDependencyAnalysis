@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Serilog;
 
-namespace NugetDependencyAnalysis
+namespace NugetDependencyAnalysis.Finding
 {
     internal class PackagesConfigFinder
     {

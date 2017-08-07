@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NugetDependencyAnalysis
+namespace NugetDependencyAnalysis.Parsing
 {
     public class NugetPackage
     {

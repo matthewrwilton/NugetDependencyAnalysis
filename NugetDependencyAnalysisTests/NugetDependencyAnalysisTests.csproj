@@ -71,21 +71,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PackagesConfigFinderTests.cs" />
-    <Compile Include="PackagesConfigParserTests.cs" />
+    <Compile Include="Finding\PackagesConfigFinderTests.cs" />
+    <Compile Include="Parsing\PackagesConfigParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="_TestData\MultipleProjectFiles\packages.config">
+    <None Include="Finding\_TestData\MultipleProjectFiles\packages.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="_TestData\NoProjectFile\packages.config">
+    <None Include="Finding\_TestData\NoProjectFile\packages.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="_TestData\SampleSolution\SampleProject\packages.config">
+    <None Include="Finding\_TestData\SampleSolution\SampleProject\packages.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -96,15 +96,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="_TestData\SampleSolution\SampleProject\SampleProject.csproj">
+    <None Include="Finding\_TestData\SampleSolution\SampleProject\SampleProject.csproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="_TestData\MultipleProjectFiles\Project1.csproj">
+    <None Include="Finding\_TestData\MultipleProjectFiles\Project1.csproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="_TestData\MultipleProjectFiles\Project2.csproj">
+    <None Include="Finding\_TestData\MultipleProjectFiles\Project2.csproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

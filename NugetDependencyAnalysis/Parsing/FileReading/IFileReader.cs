@@ -1,4 +1,4 @@
-﻿namespace NugetDependencyAnalysis.FileReading
+﻿namespace NugetDependencyAnalysis.Parsing.FileReading
 {
     internal interface IFileReader
     {

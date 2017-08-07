@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
 using Moq;
-using NugetDependencyAnalysis;
-using NugetDependencyAnalysis.FileReading;
+using NugetDependencyAnalysis.Finding;
+using NugetDependencyAnalysis.Parsing;
+using NugetDependencyAnalysis.Parsing.FileReading;
 using Serilog;
 using Xunit;
 
-namespace NugetDependencyAnalysisTests
+namespace NugetDependencyAnalysisTests.Parsing
 {
     public class PackagesConfigParserTests
     {

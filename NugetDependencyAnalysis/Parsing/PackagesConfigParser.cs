@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using NugetDependencyAnalysis.FileReading;
+using NugetDependencyAnalysis.Finding;
+using NugetDependencyAnalysis.Parsing.FileReading;
 using Serilog;
 
-namespace NugetDependencyAnalysis
+namespace NugetDependencyAnalysis.Parsing
 {
     internal class PackagesConfigParser
     {
