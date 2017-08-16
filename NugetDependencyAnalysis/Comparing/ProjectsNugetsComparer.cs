@@ -6,7 +6,7 @@ namespace NugetDependencyAnalysis.Comparing
 {
     internal class ProjectsNugetsComparer
     {
-        public IReadOnlyList<NugetDifferences> Compare(IReadOnlyList<ProjectNugetsGrouping> projects)
+        public IReadOnlyList<NugetDifferences> Compare(IEnumerable<ProjectNugetsGrouping> projects)
         {
             IEnumerable<(string projectName, NugetPackage nuget)> nugets = projects.SelectMany(project => project.Nugets.Select(nuget => (project.ProjectName, nuget)));
 

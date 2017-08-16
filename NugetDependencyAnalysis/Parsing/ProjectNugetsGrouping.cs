@@ -13,5 +13,10 @@ namespace NugetDependencyAnalysis.Parsing
         public string ProjectName { get; }
 
         public IReadOnlyList<NugetPackage> Nugets { get; }
+
+        public override string ToString()
+        {
+            return ProjectName;
+        }
     }
 }

@@ -38,5 +38,10 @@ namespace NugetDependencyAnalysis.Finding
         {
             throw new InvalidOperationException($"{nameof(PackagesConfigFile)} is not intended to be the key in a collection.");
         }
+
+        public override string ToString()
+        {
+            return $"{ProjectName}: {Path}";
+        }
     }
 }

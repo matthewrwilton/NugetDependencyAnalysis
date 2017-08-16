@@ -40,5 +40,10 @@ namespace NugetDependencyAnalysis.Comparing
         {
             throw new InvalidOperationException($"{nameof(VersionProjectsGrouping)} is not intended to be the key in a collection.");
         }
+
+        public override string ToString()
+        {
+            return Version;
+        }
     }
 }

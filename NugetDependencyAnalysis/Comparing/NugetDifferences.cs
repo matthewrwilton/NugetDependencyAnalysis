@@ -47,5 +47,10 @@ namespace NugetDependencyAnalysis.Comparing
         {
             throw new InvalidOperationException($"{nameof(NugetDifferences)} is not intended to be the key in a collection.");
         }
+
+        public override string ToString()
+        {
+            return PackageName;
+        }
     }
 }
