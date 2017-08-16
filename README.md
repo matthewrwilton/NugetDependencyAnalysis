@@ -18,7 +18,19 @@ E.g. NugetDependencyAnalysis.exe "C:\repos"
 ```
 
 1. Finds all `packages.config` files located in or in a subdirectory of the given directory.
-2. Compares the dependencies in all the `packages.config` files and reports for dependencies that have different versions, what the different versions are and the projects for each version.
+2. Compares all the `packages.config` files and outputs for nuget packages that have multiple versions or target frameworks referenced what projects they are referenced in.
+
+#### Example
+
+```
+NugetDependencyAnalysis.exe C:\repos
+[21:14:05 INF] Package1 has different frameworks targetted ["net46", "net45"] across different projects
+[21:14:05 INF] Package1 net46 referenced in projects ["ProjectA"]
+[21:14:05 INF] Package1 net45 referenced in projects ["ProjectB"]
+[21:14:05 INF] Package2 has multiple versions ["1.1.603", "1.2.1"] referenced in different projects
+[21:14:05 INF] Package2 1.1.603 referenced in projects ["ProjectA"]
+[21:14:05 INF] Package1 1.2.1 referenced in projects ["ProjectC"]
+```
 
 ### License
 
