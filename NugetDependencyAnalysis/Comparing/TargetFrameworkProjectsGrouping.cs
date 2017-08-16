@@ -4,21 +4,21 @@ using System.Linq;
 
 namespace NugetDependencyAnalysis.Comparing
 {
-    internal class VersionProjectsGrouping : IEquatable<VersionProjectsGrouping>
+    internal class TargetFrameworkProjectsGrouping : IEquatable<TargetFrameworkProjectsGrouping>
     {
-        public VersionProjectsGrouping(string version, IEnumerable<string> projectNames)
+        public TargetFrameworkProjectsGrouping(string targetFramework, IEnumerable<string> projectNames)
         {
-            Version = version;
+            TargetFramework = targetFramework;
             ProjectNames = new List<string>(projectNames);
         }
 
-        public string Version { get; }
+        public string TargetFramework { get; }
 
         public IReadOnlyList<string> ProjectNames { get; }
 
-        public bool Equals(VersionProjectsGrouping other)
+        public bool Equals(TargetFrameworkProjectsGrouping other)
         {
-            return Version == other.Version &&
+            return TargetFramework == other.TargetFramework &&
                 ProjectNames.SequenceEqual(other.ProjectNames);
         }
 
@@ -33,12 +33,12 @@ namespace NugetDependencyAnalysis.Comparing
                 return true;
             }
 
-            return Equals((VersionProjectsGrouping)obj);
+            return Equals((TargetFrameworkProjectsGrouping)obj);
         }
 
         public override int GetHashCode()
         {
-            throw new InvalidOperationException($"{nameof(VersionProjectsGrouping)} is not intended to be the key in a collection.");
+            throw new InvalidOperationException($"{nameof(TargetFrameworkProjectsGrouping)} is not intended to be the key in a collection.");
         }
     }
 }

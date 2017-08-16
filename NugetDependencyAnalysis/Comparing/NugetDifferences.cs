@@ -6,19 +6,26 @@ namespace NugetDependencyAnalysis.Comparing
 {
     internal class NugetDifferences : IEquatable<NugetDifferences>
     {
-        public NugetDifferences(string packageName, IReadOnlyList<VersionProjectsGrouping> versionDifferences)
+        public NugetDifferences(
+            string packageName,
+            IReadOnlyList<TargetFrameworkProjectsGrouping> targetFrameworkDifferences,
+            IReadOnlyList<VersionProjectsGrouping> versionDifferences)
         {
             PackageName = packageName;
+            TargetFrameworkDifferences = targetFrameworkDifferences;
             VersionDifferences = versionDifferences;
         }
 
         public string PackageName { get; }
+
+        public IReadOnlyList<TargetFrameworkProjectsGrouping> TargetFrameworkDifferences { get; }
 
         public IReadOnlyList<VersionProjectsGrouping> VersionDifferences { get; }
 
         public bool Equals(NugetDifferences other)
         {
             return PackageName == other.PackageName &&
+                TargetFrameworkDifferences.SequenceEqual(other.TargetFrameworkDifferences) &&
                 VersionDifferences.SequenceEqual(other.VersionDifferences);
         }
 

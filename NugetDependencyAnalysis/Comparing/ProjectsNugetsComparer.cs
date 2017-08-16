@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NugetDependencyAnalysis.Parsing;
 
@@ -21,12 +20,28 @@ namespace NugetDependencyAnalysis.Comparing
                     continue;
                 }
 
-                var versionDifferences = nugetsGrouping.GroupBy(nugetAndProject => nugetAndProject.nuget.Version)
-                    .ToList();
-
-                if (versionDifferences.Count > 0)
+                var targetFrameworks = nugetsGrouping.GroupBy(nugetAndProject => nugetAndProject.nuget.TargetFramework)
+                        .ToList();
+                var targetFrameworkDifferences = new List<TargetFrameworkProjectsGrouping>();
+                if (targetFrameworks.Count > 1)
                 {
-                    differences.Add(new NugetDifferences(nugetsGrouping.Key, versionDifferences.Select(item => new VersionProjectsGrouping(item.Key, item.Select(i => i.projectName).ToList())).ToList()));
+                    targetFrameworkDifferences = targetFrameworks.Select(item => new TargetFrameworkProjectsGrouping(item.Key, item.Select(i => i.projectName)))
+                        .ToList();
+                }
+
+                var versions = nugetsGrouping.GroupBy(nugetAndProject => nugetAndProject.nuget.Version)
+                        .ToList();
+                var versionDifferences = new List<VersionProjectsGrouping>();
+                if (versions.Count > 1)
+                {
+                    versionDifferences = versionDifferences = versions.Select(item => new VersionProjectsGrouping(item.Key, item.Select(i => i.projectName)))
+                        .ToList();
+                }
+
+                if (targetFrameworkDifferences.Count > 0 || versionDifferences.Count > 0)
+                {
+                    var nugetDifferences = new NugetDifferences(nugetsGrouping.Key, targetFrameworkDifferences, versionDifferences);
+                    differences.Add(nugetDifferences);
                 }
             }
 

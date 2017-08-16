@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Comparing\NugetDifferences.cs" />
     <Compile Include="Comparing\ProjectsNugetsComparer.cs" />
+    <Compile Include="Comparing\TargetFrameworkProjectsGrouping.cs" />
     <Compile Include="Comparing\VersionProjectsGrouping.cs" />
     <Compile Include="Parsing\FileReading\FileReader.cs" />
     <Compile Include="Parsing\FileReading\IFileReader.cs" />
