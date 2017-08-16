@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NugetDependencyAnalysis.Parsing;
 
@@ -33,7 +34,7 @@ namespace NugetDependencyAnalysis.Comparing
         }
     }
 
-    public class NugetDifferences
+    public class NugetDifferences : IEquatable<NugetDifferences>
     {
         public NugetDifferences(string packageName, IReadOnlyList<VersionProjectsGrouping> versionDifferences)
         {
@@ -44,9 +45,34 @@ namespace NugetDependencyAnalysis.Comparing
         public string PackageName { get; }
 
         public IReadOnlyList<VersionProjectsGrouping> VersionDifferences { get; }
+
+        public bool Equals(NugetDifferences other)
+        {
+            return PackageName == other.PackageName &&
+                VersionDifferences.SequenceEqual(other.VersionDifferences);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj) || obj.GetType() != GetType())
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            return Equals((NugetDifferences)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            throw new InvalidOperationException($"{nameof(NugetDifferences)} is not intended to be the key in a collection.");
+        }
     }
 
-    public class VersionProjectsGrouping
+    public class VersionProjectsGrouping : IEquatable<VersionProjectsGrouping>
     {
         public VersionProjectsGrouping(string version, IReadOnlyList<string> projectNames)
         {
@@ -57,5 +83,30 @@ namespace NugetDependencyAnalysis.Comparing
         public string Version { get; }
 
         public IReadOnlyList<string> ProjectNames { get; }
+
+        public bool Equals(VersionProjectsGrouping other)
+        {
+            return Version == other.Version &&
+                ProjectNames.SequenceEqual(other.ProjectNames);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj) || obj.GetType() != GetType())
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            return Equals((VersionProjectsGrouping)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            throw new InvalidOperationException($"{nameof(VersionProjectsGrouping)} is not intended to be the key in a collection.");
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace NugetDependencyAnalysis.Finding
 {
-    internal class PackagesConfigFile
+    internal class PackagesConfigFile : IEquatable<PackagesConfigFile>
     {
         public PackagesConfigFile(string path, string projectName)
         {
@@ -13,6 +13,12 @@ namespace NugetDependencyAnalysis.Finding
         public string Path { get; }
 
         public string ProjectName { get; }
+
+        public bool Equals(PackagesConfigFile other)
+        {
+            return Path == other.Path &&
+                ProjectName == other.ProjectName;
+        }
 
         public override bool Equals(object obj)
         {
@@ -26,12 +32,6 @@ namespace NugetDependencyAnalysis.Finding
             }
 
             return Equals((PackagesConfigFile)obj);
-        }
-
-        protected bool Equals(PackagesConfigFile other)
-        {
-            return Path == other.Path &&
-                ProjectName == other.ProjectName;
         }
 
         public override int GetHashCode()

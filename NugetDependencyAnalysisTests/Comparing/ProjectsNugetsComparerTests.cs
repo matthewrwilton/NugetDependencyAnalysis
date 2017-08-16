@@ -72,24 +72,7 @@ namespace NugetDependencyAnalysisTests.Comparing
                     new VersionProjectsGrouping("1.1.1", new List<string> { "SampleProject2" })
                 });
 
-            Assert.Collection(
-                actual, 
-                actualItem =>
-                {
-                    actualItem.PackageName.Should().Be("Nuget1");
-                    Assert.Collection(
-                        actualItem.VersionDifferences,
-                        actualVersionDifference =>
-                        {
-                            actualVersionDifference.Version.Should().Be("1.0.0");
-                            actualVersionDifference.ProjectNames.Should().BeEquivalentTo("SampleProject1");
-                        },
-                        actualVersionDifference =>
-                        {
-                            actualVersionDifference.Version.Should().Be("1.1.1");
-                            actualVersionDifference.ProjectNames.Should().BeEquivalentTo("SampleProject2");
-                        });
-                });
+            actual.Should().BeEquivalentTo(expected);
         }
     }
 }
